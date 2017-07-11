@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">	
+		#successpage{
+			font-size:16px;
+		}
+		#dao{
+			color:#f00;
+			font-weight:bold;
+			font-size:18px;
+		}
+	</style>
+	<script src="../js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript">
+		window.onload=function (){
+			i=setInterval(sum,1000);			
+		}
+		
+		function sum(){
+				var num=parseInt($("#dao")[0].innerHTML)
+				num--;
+				$("#dao")[0].innerHTML=num;
+				
+			if(num<0){
+					clearInterval(i);
+					window.close();
+					location.href="login.html";
+				}else{
+					setno=setTimeout(sum,1000);//一秒后执行dao,			
+				}
+			}
+	</script>
+<body>
+	<div id="successpage">注册成功，<span id="dao">3</span>秒后跳转到首页</div>
+</body>
+</html>

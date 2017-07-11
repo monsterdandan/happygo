@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*=============样式重置=============*/
+body,h1,h2,h3,h4,h5,h6,a,p,img,ul,ol,dl,dt,dd,input,figure,figcaption{padding:0;margin:0;}
+header,nav,main,section,article,aside,footer,img,figure,figcaption{display:block;}
+ul,ol{list-style:none;}
+img,input,select{border:0;}
+input,select{outline:none;background:none;}
+
+body{
+	font-size:12px;
+	font-family:"微软雅黑";
+	color:#666;
+	background:#fbfbfb;
+}
+body,html{
+	height:100%;
+}
+a{
+	text-decoration:none;
+	color:#333;
+	}
+a:hover{
+	color:#c41f3a;
+	text-decoration:none;
+	}
+html,body{
+	height:100%;
+	}
+/*=============公共样式=============*/
+.l{float:left;}
+.r{float:right;}
+.w{
+	width:1000px;
+	margin:0 auto;
+	}
