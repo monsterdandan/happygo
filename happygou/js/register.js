@@ -34,7 +34,12 @@ $("#register").click(function(){
 		success:function(data){
 			if(data=="1"){
 				//保存cookie
-				location.href="../index.html";
+			var date=new Date();
+			date.setDate(date.getDate()+7);			
+			//保存cookie
+			document.cookie = "userName="+encodeURIComponent($("#userName").val())+";expires="+date.toGMTString();
+
+			location.href="../index.html";
 			}else{
 				alert("亲，用户名或者密码错误，登录失败，请想好再输！");
 			}
