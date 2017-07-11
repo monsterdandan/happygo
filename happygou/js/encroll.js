@@ -24,19 +24,20 @@
 	}
 
 	//验证
-	let arr=[0,0,0,0,0,0,0];
+	
 	//用户名正则验证
 	$("#userName").focus(function(){
 		$("#userNametest").html("请输入用户名,用户名为6-20位字母、数字或符号组合");
 			$("#userNametest")[0].style.color="#999";
-		$("#userName")[0].style.background="";
+		$("#userName")[0].style.background="";			
+		
 	})
 	$("#userName")[0].onchange=function(){
 		if(!checkReg("userName",$("#userName")[0].value)){
 			$("#userNametest").html("用户名为6-20位字母、数字或符号组合，请重新输入!");
-			$("#userNametest")[0].style.color="#F11E63";
+			$("#userNametest")[0].style.color="#F11E63";	
+		
 		}else{
-			isOk=true;
 			$("#userNametest").html("");
 			$("#userNametest")[0].style.color="#55A532";
 			$("#userName")[0].style.background="url(../images/encroll/sign.png) no-repeat right"
@@ -56,7 +57,6 @@
 			$("#emailtest")[0].style.color="#F11E63";			
 		
 		}else{
-			isOk=true;
 			$("#emailtest").html("");
 			$("#userEmail")[0].style.background="url(../images/encroll/sign.png) no-repeat right"
 		}
@@ -76,7 +76,6 @@
 			$("#teltest")[0].style.color="#F11E63";			
 		
 		}else{
-			isOk=true;
 			$("#teltest").html("");
 			$("#phoneNum")[0].style.background="url(../images/encroll/sign.png) no-repeat right"
 		}
@@ -96,7 +95,6 @@
 			$("#pswtest")[0].style.color="#F11E63";			
 		
 		}else{
-			isOk=true;
 			$("#pswtest").html("");
 			$("#psw_one")[0].style.background="url(../images/encroll/sign.png) no-repeat right"
 		}
@@ -114,7 +112,6 @@
 			$("#pswtest2").html("两次密码输入不一致");
 			$("#pswtest2")[0].style.color="#F11E63";						
 		}else{
-			isOk=true;
 			$("#pswtest2").html("");
 			$("#psw_two")[0].style.background="url(../images/encroll/sign.png) no-repeat right"
 			
@@ -155,12 +152,19 @@
 			$("#codetest2").html("验证码输入有误");
 			$("#codetest2")[0].style.color="#F11E63";
 		}else{
-			isOk=true;
 			$("#codetest2").html("");
 			$("#V_code")[0].style.background="url(../images/encroll/sign.png) no-repeat right"			
 		}
 	}
 	
+	//手机验证码
+	$("#codeMsg").focus(function(){
+		$("#codetest").html("请输入发送到您手机上的验证码");
+	})
+	$("#codeMsg").change(function(){
+		$("#codetest").html("");
+	})
+
 
 	/*$("form").submit(function(){
 		if($$("form input").val()==""){
@@ -169,7 +173,7 @@
 	})*/
 
 $("#enter").click(function(){
-	if(isOk){
+	
 	$.ajax({
 		url:"../php/encroll.php",
 		async:true,
@@ -189,12 +193,6 @@ $("#enter").click(function(){
 			}
 		}		
 	});	
-	}else{
-		let inps=$(".inputs");
-		for(let i=0;i<inps.length;i++){	
-			inps[i].style.boxShadow="2px 0px 2px rgba(255,0,0,.5),0px 2px 2px rgba(255,0,0,.5),0px -2px 2px rgba(255,0,0,.5),-2px 0px 2px rgba(255,0,0,.5)"
-		}
-	}
 });
 
 

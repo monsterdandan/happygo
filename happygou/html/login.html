@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>欢乐购—-用户登录</title>
+	<title>欢乐购—-用户注册</title>
 	<link rel="stylesheet" href="../css/register-style.css">
 	<link rel="stylesheet" href="../css/public.css">
 </head>
@@ -36,9 +36,11 @@
 				<p class="form_h2">
 					登录快乐购<span>还没有快乐购账号
 					<a href="encroll.html">立即注册</a></span></p>
+				<input type="radio" id="tel_enter" name="enter" checked> 快捷登录
+					&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" id="name_enter" name="enter"> 普通密码登录<br><br>
 				<div id="encroll_form1" class="form">
-					<input type="text" placeholder="用户名" id="userName" class="longinput"><br><br><br>					
 					<input type="text" placeholder="请输入手机号码" id="phoneNum" class="longinput"><br><br><br>
+					<input type="text" placeholder="已验证手机/邮箱/用户名" id="userName" class="longinput"><br><br><br>
 					<input type="password" placeholder="请输入密码" id="psw_one" class="longinput"><br><br><br>
 					
 					<input type="text" placeholder="验证码" id=codeMsg class="shortinput"> <input type="button" value="获取验证码" id="btnMsg"><br><br><br>
@@ -102,4 +104,4 @@
 </html>
 <script src="../js/jquery-1.8.3.min.js"></script>
 <script src="../js/register.js"></script>
-<script src="../js/cookieTools.js"></script>
+	
