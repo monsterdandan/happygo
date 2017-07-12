@@ -12,8 +12,8 @@
 	}
 	
 	//3）、传输数据（过桥）
-	$sqlstr = "select * from goodsInfo g,shoppingCart s
-			   where g.goodsId = s.goodsId  and s.username = '".$vipName."'";
+	$sqlstr = "select * from goodsinfo g,shoppingcart s
+			   where  g.goodsId = s.goodsId  and s.username = '".$vipName."'";
 	
 	$result = mysql_query($sqlstr,$conn);//执行查询的sql语句后，有返回值，返回的是查询结果
 		

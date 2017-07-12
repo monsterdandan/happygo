@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>欢乐购</title>
 	<link rel="stylesheet" type="text/css" href="../css/public.css">
-	<link rel="stylesheet" type="text/css" href="../css/cart-style.css">
+	<link rel="stylesheet" type="text/css" href="../css/cart.css">
 
 </head>
 <body>
@@ -83,7 +83,7 @@
 		</div>
 	</div>
 	<div id="cart_goods" style="display:none;">
-		<div class="w">
+		<div class="w goodsbuy">
 			<ul class="header">
 				<li class="l">
 					<input type="checkbox" checked> 全选
@@ -96,12 +96,7 @@
 			</ul>
 			
             	
-            <div class="content">
-				<input type="checkbox" checked class="l">
-				<p class="p1" class="l">自营</p>
-				<a href="../index.html">快乐购商城</a>
-				<p class="r">在线支付满199.00包邮</p>
-			</div>
+            
 			<!--<ul class="goodslist">
 				<li class="l">
 					<input type="checkbox" checked>
@@ -117,7 +112,8 @@
 					<input type="button" value="删除">
 				</li>
 			</ul>-->
-			<div class="account">
+		</div>
+			<div class="w account">
 				<p class="l"><input type="checkbox" checked> 全选</p>
 				<ul class="r">
 					<li class="l">已选商品 <span id="goodsNum">1</span> 件</li>
@@ -126,7 +122,7 @@
 					<li class="l"><a href="">去结算</a></li>
 				</ul>
 			</div>
-		</div>
+		
 	</div>
 	<div id="youlike">
 		<p><span>猜你喜欢</span></p>
@@ -215,6 +211,8 @@
 <script src="../js/jquery-1.8.3.min.js"></script>
 <script src="../js/cookie.js"></script>
 <script>
+	
+	//获取cookie，把对应用户名的购物车显示出来
 	let userName=getCookieValue("userName");
 	if(userName){
 		$(".loginBox").html("<a href='../index.html'>"+userName+"</a>&nbsp;中午好！<a href='../index.html' class='exit'>退出</a>");
@@ -222,6 +220,9 @@
 			removeCookie("userName");
 		}
 	}
+	
+	
+	//从后台获取某用户添加到购物车的数据，显示在购物车中
 	$.ajax({
 		url:"../php/getShoppingCart.php",
 		async:true,
@@ -230,22 +231,50 @@
 		success:function(data){
 			console.log(data);
 			for(let i=0;i<data.length;i++){
-			let goodsId=data[i].goodsId;
-			let goodsName=data[i].goodsName;
-			let goodsPrice=data[i].goodsPrice;
-			let beiyong11=data[i].beiyong11;
-			let goodsCount=data[i].goodsCount;
-			$("#cart_goods")[0].style.display="block";
-			$("#empty_cart")[0].style.display="none";
 			
-			let str="<ul class='goodslist'><li class='l'><input type='checkbox' checked></li><li class='l cartimg'>";
-			str+="<a href='detail.html?'"+goodsId+"'><img src='"+beiyong11+"'></a></li><li class='l cartgoodsname'><a href='detail.html?'"+goodsId+"'>"+goodsName+"</a></li><li class='l cartprice'>￥"+goodsPrice+"</li><li class='l'><a href='' class='l cartjian'>-</a><input type='text' value='1' class='l cartcounts'><a href='' class='l cartadd'>+</a></li><li class='l'><span>￥</span><b class='addcount'>249</b></li><li class='l'><input type='button' value='删除'></li></ul>";
-			$(str).insertAfter(".content")
-			$(".cartcounts").val(goodsCount);
+				let goodsId=data[i].goodsId;
+				let goodsName=data[i].goodsName;
+				let goodsPrice=data[i].goodsPrice;
+				let beiyong11=data[i].beiyong11;
+				let goodsCount=data[i].goodsCount;
+				
+	
+				$("#cart_goods")[0].style.display="block";
+				$("#empty_cart")[0].style.display="none";
+				
+				let str="<div id='cart_list'><div class='content'><input type='checkbox' checked class='l'><p class='p1' class='l'>自营</p><a href='../index.html'>快乐购商城</a><p class='r'>在线支付满199.00包邮</p></div><ul class='goodslist'><li class='l'><input type='checkbox' checked></li><li class='l cartimg'>";
+				str+="<a href='detail.html?"+goodsId+"'><img src='"+beiyong11+"'></a></li><li class='l cartgoodsname'><a href='detail.html?"+goodsId+"'>"+goodsName+"</a></li><li class='l cartprice'>￥"+goodsPrice+"</li>"
+				str+="<li class='l'><a class='l cartjian'>-</a><span class='l cartcounts'>"+goodsCount+"</span><a class='l cartadd'>+</a></li><li class='l'><span>￥</span><b class='addcount'>249</b></li>"
+				str+="<li class='l'><input type='button' value='删除' class='delbtn' delid='"+goodsId+"'></li></ul></div>";
+				$(str).insertAfter(".header");
+				
+				//删除购物车商品
+				let delbtn=$(":button");
+				for(let j=0;j<delbtn.length;j++){
+					delbtn[j].onclick=function(){
+						attrValue=delbtn[j].getAttribute("delid");
+						console.log(attrValue);
+						$.ajax({
+							type:"get",
+							url:"../php/deleteGoods.php",
+							async:true,
+							data:{
+								vipName:userName,
+								goodsId:attrValue
+							},
+							success:function(){
+								$("#cart_list").empty();
+								window.location.reload();
+							}
+						});
+					}
+				}
+				$("#cart_goods")[0].style.height=180*(i+1)+117+"px";
 			}
 		},
 		dataType:"json"
-	})
+	});
+	
 
 </script>
 <script src="../js/public.js"></script>

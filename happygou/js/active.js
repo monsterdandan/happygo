@@ -156,88 +156,17 @@
 		for(let i=0;i<lis.length;i++){
 			lis[i].index=i;
 			lis[i].onclick=function(){
-				ord=this.index;
+				ord=this.index+1;
 				for(let j=0;j<lis.length;j++){
 					lis[j].style.backgroundColor="#333";
 					imgs[j].style.opacity=0;
 				}
-				lis[this.index].style.backgroundColor="#fff";
-				imgs[this.index].style.opacity=1;	
+				lis[ord-1].style.backgroundColor="#fff";
+				imgs[ord-1].style.opacity=1;	
 			}
 		}
 
 
-		//今日直播效果
-	var liveArr=$(".showgoods");
-	var liveimgArr=$(".liveimg");
-	for(let i=0;i<liveArr.length;i++){
-		liveArr[i].onmouseover=function(){
-			liveArr[i].style.border="2px solid #c41f3a";
-			liveimgArr[i].style.transform="scale(1.1)";
-			liveimgArr[i].style.transition="all 0.6s"
-		}
-		liveArr[i].onmouseout=function(){
-			liveArr[i].style.borderColor="#333";
-			liveimgArr[i].style.transform=""
-		}
-	}
-
-			//向左向右按钮效果
-		$(".livebox").hover(
-	  		function () {
-	    		$(".live_btn")[0].style.display="block";
-	  		},
-	  		function () {
-	    		$(".live_btn")[0].style.display="none";
-	  		}
-		);
-		for(let i=0;i<$(".showgoods").length;i++){
-			$(".showgoods")[i].style.left=189*i+"px";
-		}
-		let todayArr=$(".live_today").children();
-		$(".live_next").click(function(){
-			
-			for(let i=0;i<todayArr.length;i++){
-				todayArr[i].style.left=(-189*(5-i))+"px";
-				todayArr[i].style.transition="left 1s";
-			}
-		})
-		$(".live_prev").click(function(){
-			for(let i=0;i<todayArr.length;i++){
-				todayArr[i].style.left=189*i+"px";
-				todayArr[i].style.transition="left 1s";
-			}
-		})
-		let yesterdayArr=$(".live_hidden").children();
-		$(".live_next").click(function(){
-			
-			for(let i=0;i<todayArr.length;i++){
-				yesterdayArr[i].style.left=(-189*(5-i))+"px";
-				yesterdayArr[i].style.transition="left 1s";
-			}
-		})
-		$(".live_prev").click(function(){
-			for(let i=0;i<todayArr.length;i++){
-				yesterdayArr[i].style.left=189*i+"px";
-				yesterdayArr[i].style.transition="left 1s";
-			}
-		})
-		$(".yesterday").click(function(){
-			$(".live_hidden")[0].style.display="block";
-			$(".live_today")[0].style.display="none";
-			for(let i=0;i<todayArr.length;i++){
-				yesterdayArr[i].style.left=189*i+"px";
-				yesterdayArr[i].style.transition="left 1s";
-			}
-		})
-		$(".today").click(function(){
-			$(".live_hidden")[0].style.display="none";
-			$(".live_today")[0].style.display="block";
-			for(let i=0;i<todayArr.length;i++){
-				yesterdayArr[i].style.left=189*i+"px";
-				yesterdayArr[i].style.transition="left 1s";
-			}
-		})
 
 		//提示窗口
 		$("#djck").click(function(){

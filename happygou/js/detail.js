@@ -13,6 +13,9 @@
 			smallImgs[i].className="";
 		}
 	}*/
+	
+	
+	//页面加载查看是否存在cookie
 	let userName=getCookieValue("userName");
 	if(userName){
 		$(".loginBox").html("<a href='../index.html'>"+userName+"中午好！</a><a href='' class='exit'>退出</a>");
@@ -20,8 +23,22 @@
 			removeCookie("userName");
 		}
 	}
-
 	
+	
+	//商品数量加减按钮
+	let num=parseInt($(".counts").val());
+		//console.log(parseInt($(".counts").val()));
+		$(".jian").click(function(){
+			if(num>1){num=num-1;}
+			$(".counts").val(num);
+		})
+		$(".add").click(function(){
+			num=num+1;
+			$(".counts").val(num);
+		});
+	
+	
+	//从列表页取得的id，拆分，根据goodsid从后台取数据
 	let str=location.href;
 	let str1=str.split("?")
 	console.log(str1);
@@ -47,11 +64,13 @@
 			$(".two").html(obj.goodsDesc);
 			$(".three b").html(obj.goodsPrice);
 			$(".three del").html("￥"+obj.beiyong1);
-			console.log(obj.goodsName);
 		},
 	});
+	
+	
+	//点击加入购物车添加商品
 	$(".add_cart").click(function(){
-		let userName=getCookieValue("userName");
+		let userName=getCookieValue("userName");	
 		$.ajax({
 			url:"../php/addShoppingCart.php",
 			async:true,
@@ -59,25 +78,15 @@
 			data:{
 				vipName:userName,
 				goodsId:goodsId,
-				goodsCount:parseInt($(".counts").val())
+				goodsCount:$(".counts").val()
 			},
 			success:function(data){
-				if(data){
+				if(data==1){
 					alert("添加成功");
 				}else{
 					alert("添加失败");
 				}
 			}
 		})
-	})
-	let num=parseInt($(".counts").val());
-	//console.log(parseInt($(".counts").val()))
-	$(".jian").click(function(){
-		if(num>1){num=num-1;}
-		$(".counts").val(num);
-	})
-	$(".add").click(function(){
-		num=num+1;
-		$(".counts").val(num);
 	})
 
